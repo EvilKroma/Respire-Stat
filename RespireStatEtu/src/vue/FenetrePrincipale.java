@@ -75,7 +75,7 @@ public class FenetrePrincipale extends JFrame{
 
 		//ONGLET 2
 		JPanel onglet2 = new JPanel();
-		JLabel labelTableau=new JLabel();
+		JLabel labelTableau= new JLabel();
 		Etablissement etabNO2,etabPM10,etabPM25;
 		JTable table;
 		JScrollPane spane;
@@ -96,10 +96,11 @@ public class FenetrePrincipale extends JFrame{
 				Etablissement[] etabs = new Etablissement[3];
 				etabs[0] = etabNO2;
 				etabs[1] = etabPM10;
-				etabs[2] = etabPM25;tab1 = new TableauStat1(etabs, annee);
+				etabs[2] = etabPM25;
+				tab1 = new TableauStat1(etabs, annee);
 
 				table = new JTable(tab1);
-				spane =new JScrollPane(table);
+				spane = new JScrollPane(table);
 
 				table.setCellSelectionEnabled(false);
 
@@ -140,6 +141,25 @@ public class FenetrePrincipale extends JFrame{
 		//ONGLET 4
 		//TODO Faire l'onglet 4 : il ressemble beaucoup à l'onglet 3 !
 		JPanel onglet4 = new JPanel();
+		
+		
+		HashMap<String, Double> moyenneVilesNO2 = new HashMap<String, Double>();
+		HashMap<String, Double> moyenneVilesPM10 = new HashMap<String, Double>();
+		HashMap<String, Double> moyenneVilesPM25 = new HashMap<String, Double>();
+		for(String ville : ConvertCSV.listeVilles) {
+			moyenneVilesNO2.put(ville, StatEtab.getMoyennePolluantNO2Ville(ConvertCSV.listeEtab, ville, 2017));
+			moyenneVilesPM10.put(ville, StatEtab.getMoyennePolluantPM10Ville(ConvertCSV.listeEtab, ville, 2017));
+			moyenneVilesPM25.put(ville, StatEtab.getMoyennePolluantPM25Ville(ConvertCSV.listeEtab, ville, 2017));
+		}
+
+		TableauStat2 tab3 = new TableauStat2(moyenneVilesNO2, moyenneVilesPM10,moyenneVilesPM25);
+
+		table = new JTable(tab3);
+		spane = new JScrollPane(table);
+
+		onglet4.add(spane);
+
+		onglets.addTab("Autre", onglet4);
 		
 		//TODO Créer les 3 HashMap
 		//TODO Parcourir la liste des départements pour mettre dans les 3 HashMap le département (clé) et la moyenne de chaque polluant (valeur)
