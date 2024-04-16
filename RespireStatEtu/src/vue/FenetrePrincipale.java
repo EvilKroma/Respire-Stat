@@ -30,7 +30,7 @@ public class FenetrePrincipale extends JFrame{
 		super();
 		build();
 	}
-
+	
 	private void build(){
 		File f;
 		String message="";
@@ -86,7 +86,7 @@ public class FenetrePrincipale extends JFrame{
 		c.gridy = 0;
 		for(int annee=2012; annee<=2017; annee++) {
 
-			labelTableau.setText(" "+annee);
+			labelTableau.setText(" " + annee);
 
 			etabNO2 = StatEtab.getPlusPolluantNO2(ConvertCSV.listeEtab, annee);
 			etabPM10 = StatEtab.getPlusPolluantPM10(ConvertCSV.listeEtab, annee);			
@@ -143,36 +143,24 @@ public class FenetrePrincipale extends JFrame{
 		JPanel onglet4 = new JPanel();
 		
 		
-		HashMap<String, Double> moyenneVilesNO2 = new HashMap<String, Double>();
-		HashMap<String, Double> moyenneVilesPM10 = new HashMap<String, Double>();
-		HashMap<String, Double> moyenneVilesPM25 = new HashMap<String, Double>();
-		for(String ville : ConvertCSV.listeVilles) {
-			moyenneVilesNO2.put(ville, StatEtab.getMoyennePolluantNO2Ville(ConvertCSV.listeEtab, ville, 2017));
-			moyenneVilesPM10.put(ville, StatEtab.getMoyennePolluantPM10Ville(ConvertCSV.listeEtab, ville, 2017));
-			moyenneVilesPM25.put(ville, StatEtab.getMoyennePolluantPM25Ville(ConvertCSV.listeEtab, ville, 2017));
+		HashMap<String, Double> moyenneDptNO2 = new HashMap<String, Double>();
+		HashMap<String, Double> moyenneDptPM10 = new HashMap<String, Double>();
+		HashMap<String, Double> moyenneDptPM25 = new HashMap<String, Double>();
+		for(String dpt : ConvertCSV.listeDepartements) {
+			moyenneDptNO2.put(dpt, StatEtab.getMoyennePolluantNO2Dpt(ConvertCSV.listeEtab, dpt, 2017));
+			moyenneDptPM10.put(dpt, StatEtab.getMoyennePolluantPM10Dpt(ConvertCSV.listeEtab, dpt, 2017));
+			moyenneDptPM25.put(dpt, StatEtab.getMoyennePolluantPM25Dpt(ConvertCSV.listeEtab, dpt, 2017));
 		}
 
-		TableauStat2 tab3 = new TableauStat2(moyenneVilesNO2, moyenneVilesPM10,moyenneVilesPM25);
+		TableauStat3 tab3 = new TableauStat3(moyenneDptNO2, moyenneDptPM10,moyenneDptPM25);
 
 		table = new JTable(tab3);
 		spane = new JScrollPane(table);
 
 		onglet4.add(spane);
 
-		onglets.addTab("Autre", onglet4);
-		
-		//TODO Créer les 3 HashMap
-		//TODO Parcourir la liste des départements pour mettre dans les 3 HashMap le département (clé) et la moyenne de chaque polluant (valeur)
-		//TODO Créer un objet TableauStat3 dans lequel vous met
+		onglets.addTab("Moyenne par département en 2017", onglet4);
 
-
-		//TODO Décommenter les lignes suivantes
-		//table = new JTable(tab3);
-		//spane = new JScrollPane(table);
-
-		//onglet4.add(spane);
-
-		//onglets.addTab("Moyenne par département 2017", onglet4);
 
 
 		panel.add(onglets);

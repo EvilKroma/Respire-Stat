@@ -9,6 +9,8 @@ public class TableauStat1 extends AbstractTableModel{
 	private final String[] entetes = { "", "NO2", "PM10", "PM25" };	
 	private final Etablissement[] etabs;
 	private final int annee;
+	
+	
 	public TableauStat1(Etablissement[] contents, int annee) {
 		etabs = contents;
 		this.annee = annee;
