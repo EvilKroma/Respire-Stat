@@ -185,14 +185,14 @@ public class FenetrePrincipale extends JFrame{
 			pourcentageDptPM25.put(dpt, StatEtab.getMoyennePolluantNO2Dpt(ConvertCSV.listeEtab, dpt, 2017));
 		}
 		
-		TableauStat4 tab4 = new TableauStat4(moyenneDptNO2, moyenneDptPM10, moyenneDptPM25);
+		TableauStat4 tab4 = new TableauStat4(pourcentageDptNO2, pourcentageDptPM10, pourcentageDptPM25);
 		
 		table = new JTable(tab4);
 		spane = new JScrollPane(table);
 		
 		onglet5.add(spane);
 		
-		onglets.addTab("Moyenne par département en 2017", onglet5);
+		onglets.addTab("Moyenne par département en 2015", onglet5);
 		
 		panel.add(onglet5);
 		
