@@ -164,10 +164,41 @@ public class FenetrePrincipale extends JFrame{
 
 
 		panel.add(onglets);
+		
+		
 
 
+		
+	
+	//ONGLET 5
+	//TODO Faire l'onglet 5 : Pour chaque département, donnez le pourcentage d'évolution (en moyenne de tous les établissements) de chaque polluant entre chaque année de 2012 à 2017.
+		
+		JPanel onglet5 = new JPanel();
+		
+		
+		HashMap<String, Double> pourcentageDptNO2 = new HashMap<String, Double>();
+		HashMap<String, Double> pourcentageDptPM10 = new HashMap<String, Double>();
+		HashMap<String, Double> pourcentageDptPM25 = new HashMap<String, Double>();
+		for(String dpt : ConvertCSV.listeDepartements) {
+			pourcentageDptNO2.put(dpt, StatEtab.getMoyennePolluantNO2Dpt(ConvertCSV.listeEtab, dpt, 2017));
+			pourcentageDptPM10.put(dpt, StatEtab.getMoyennePolluantNO2Dpt(ConvertCSV.listeEtab, dpt, 2017));
+			pourcentageDptPM25.put(dpt, StatEtab.getMoyennePolluantNO2Dpt(ConvertCSV.listeEtab, dpt, 2017));
+		}
+		
+		TableauStat4 tab4 = new TableauStat4(pourcentageDptNO2, pourcentageDptPM10, pourcentageDptPM25);
+		
+		table = new JTable(tab4);
+		spane = new JScrollPane(table);
+		
+		onglet5.add(spane);
+		
+		onglets.addTab("Moyenne par département en 2015", onglet5);
+		
+		panel.add(onglet5);
+		
+		
 		return panel;
 	}
-
-
 }
+
+
