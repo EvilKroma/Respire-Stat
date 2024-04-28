@@ -1,60 +1,72 @@
 package vue;
 
-import java.util.HashMap;
-
 import javax.swing.table.AbstractTableModel;
+import model.Etablissement;
 
-import controleur.ConvertCSV;
+public class TableauStat4 extends AbstractTableModel {
+    private static final long serialVersionUID = 1L;
+    private final String[] entetes = { "", "NO2", "PM10", "PM25" };
+    private final Etablissement[] etabs;
+    private final int annee;
 
-public class TableauStat4 extends AbstractTableModel{
-	private static final long serialVersionUID = 1L;
-	private final String[] entetes = { "Départements", "NO2", "PM10", "PM25" };	
-	private final HashMap<String, Double> pourcentageDptNO2;
-	private final HashMap<String, Double> pourcentageDptPM10;
-	private final HashMap<String, Double> pourcentageDptPM25;
+    public TableauStat4(Etablissement[] contents, int annee) {
+        etabs = contents;
+        this.annee = annee;
+        entetes[0] = String.valueOf(annee);
+    }
 
+    @Override
+    public int getColumnCount() {
+        return entetes.length;
+    }
 	
-	public TableauStat4(HashMap<String, Double> moyenneDptNO2, HashMap<String, Double> moyenneDptPM10, HashMap<String, Double> moyenneDptPM25) {
-		this.pourcentageDptNO2 = moyenneDptNO2;
-		this.pourcentageDptPM10 = moyenneDptPM10;
-		this.pourcentageDptPM25 = moyenneDptPM25;
-	}
-	
 	@Override
-	public int getColumnCount() {
-		return entetes.length;
-	}
-	@Override
-	public String getColumnName(int columnIndex) {
-		return entetes[columnIndex];
-	}
+    public String getColumnName(int columnIndex) {
+        return entetes[columnIndex];
+    }
 
 	@Override
-	public int getRowCount() {
-		return ConvertCSV.listeDepartements.size();
-	}
+    public int getRowCount() {
+        return 5;  
+    }
 	
 
 	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-
-		switch (columnIndex) {
-		case 0:
-			return ConvertCSV.listeDepartements.get(rowIndex);
-		case 1:
-			return pourcentageDptNO2.get(ConvertCSV.listeDepartements.get(rowIndex));
-
-		case 2:
-			return pourcentageDptPM10.get(ConvertCSV.listeDepartements.get(rowIndex));
-
-		case 3:
-			return pourcentageDptPM25.get(ConvertCSV.listeDepartements.get(rowIndex));
-
-		default:
-			throw new IllegalArgumentException();
-		}
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        if (columnIndex == 0) {
+            switch (rowIndex) {
+                case 0:
+                    return "Identifiant";
+                case 1:
+                    return "Nom";
+                case 2:
+                    return "Ville";
+                case 3:
+                    return "Département";
+                case 4:
+                    return "Taux";
+                default:
+                    throw new IllegalArgumentException("Invalid row index");
+            }
+        } else {
+            Etablissement etablissement = etabs[columnIndex - 1];
+            switch (rowIndex) {
+                case 0:
+                    return etablissement.getIdentifiant();
+                case 1:
+                    return etablissement.getNomEtablissement();
+                case 2:
+                    return etablissement.getLieu().getVille();
+                case 3:
+                    return etablissement.getLieu().getDepartement();
+                case 4:
+                    return etablissement.getPollutionPM25(annee);
+                default:
+                    throw new IllegalArgumentException("Invalid row index");
+            }
+        }
+    }
 				
 	
 
-	}
 }
