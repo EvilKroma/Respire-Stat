@@ -22,12 +22,10 @@ public class TableauStat4 extends AbstractTableModel{
 	
 	@Override
 	public int getColumnCount() {
-		// TODO Compléter $$
 		return entetes.length;
 	}
 	@Override
 	public String getColumnName(int columnIndex) {
-		// TODO Compléter getColumnName
 		return entetes[columnIndex];
 	}
 
