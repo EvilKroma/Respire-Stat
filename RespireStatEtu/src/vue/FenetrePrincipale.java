@@ -48,7 +48,7 @@ public class FenetrePrincipale extends JFrame{
 		setTitle("RespireStat");
 		setSize(960,720);
 		setLocationRelativeTo(null);
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(buildContentPaneHomePage());
 	}
@@ -56,7 +56,8 @@ public class FenetrePrincipale extends JFrame{
 		System.out.println("Build content pane");
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
-
+		
+	
 		//ONGLETS
 		JTabbedPane onglets = new JTabbedPane(SwingConstants.TOP);
 		onglets.setPreferredSize(new Dimension(900,680));
@@ -172,6 +173,50 @@ public class FenetrePrincipale extends JFrame{
 	
 	//ONGLET 5
 	//TODO Faire l'onglet 5 : Pour chaque département, donnez le pourcentage d'évolution (en moyenne de tous les établissements) de chaque polluant entre chaque année de 2012 à 2017.
+		
+		JPanel onglet5 = new JPanel();
+		JLabel labelTableau2 = new JLabel();
+		Etablissement etabsNO2,etabsPM10,etabsPM25;
+		JTable table5;
+		JScrollPane spane2;
+		TableauStat4 tab4;
+
+		onglet5.setLayout(new GridBagLayout());
+		GridBagConstraints a = new GridBagConstraints();
+		a.gridy = 0;
+		for(int annee=2012; annee<=2017; annee++) {
+
+			labelTableau2.setText(" " + annee);
+
+			etabsNO2 = StatEtab.getPlusPolluantNO2(ConvertCSV.listeEtab, annee);
+			etabsPM10 = StatEtab.getPlusPolluantPM10(ConvertCSV.listeEtab, annee);			
+			etabsPM25 = StatEtab.getPlusPolluantPM25(ConvertCSV.listeEtab, annee);
+			
+			if(etabsNO2!=null && etabsPM10!=null && etabsPM25!=null) {
+				Etablissement[] etabs = new Etablissement[3];
+				etabs[0] = etabsNO2;
+				etabs[1] = etabsPM10;
+				etabs[2] = etabsPM25;
+				tab4 = new TableauStat4(etabs, annee);
+
+				table5 = new JTable(tab4);
+				spane2  = new JScrollPane(table5);
+
+				table5.setCellSelectionEnabled(false);
+
+				table5.setPreferredSize(new Dimension(500,80));
+				table5.setPreferredScrollableViewportSize(table5.getPreferredSize());
+				table5.setFillsViewportHeight(true);
+
+				//onglet2.add(labelTableau,c);
+				onglet5.add(spane2,a);
+				a.gridy++;
+			}
+			
+		}
+
+		onglets.addTab("Pourcentage 2012 à 2017", onglet5);
+
 		
 		
 		return panel;
