@@ -104,7 +104,6 @@ public class FenetrePrincipale extends JFrame{
 				spane = new JScrollPane(table);
 
 				table.setCellSelectionEnabled(false);
-
 				table.setPreferredSize(new Dimension(500,80));
 				table.setPreferredScrollableViewportSize(table.getPreferredSize());
 				table.setFillsViewportHeight(true);
@@ -205,10 +204,7 @@ public class FenetrePrincipale extends JFrame{
 				table5.setCellSelectionEnabled(false);
 				table5.setPreferredScrollableViewportSize(table5.getPreferredSize());
 				table5.setFillsViewportHeight(true);
-				table5.setRowHeight(30);
-				table5.setPreferredSize(getPreferredSize());
-				spane2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-				spane2.setPreferredSize(new Dimension(table5.getPreferredSize().width, 100));
+				table5.setPreferredSize(new Dimension(580, 110));
 
 				//onglet2.add(labelTableau,c);
 				onglet5.add(spane2,a);
