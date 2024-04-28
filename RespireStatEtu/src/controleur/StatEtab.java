@@ -176,5 +176,38 @@ public class StatEtab {
 	    
 	    return maxEtablissement;
 	}
+	
+	public static double getPourcentagePolluantNO2Dpt(ArrayList<Etablissement> l, String dpt, int annee) {
+	    double moy = 0;
+	    for (Etablissement e : l) {
+	        if (e.getLieu().getDepartement().equals(dpt)) {
+	            moy += e.getPollutionNO2(annee);
+	        }
+	    }
+	    return (moy / l.size()) * 100;
+	}
+	
+	
+	public static double getPourcentagePolluantPM10Dpt(ArrayList<Etablissement> l, String dpt, int annee) {
+	    double moy = 0;
+	    for (Etablissement e : l) {
+	        if (e.getLieu().getDepartement().equals(dpt)) {
+	            moy += e.getPollutionPM10(annee);
+	        }
+	    }
+	    return (moy / l.size()) * 100;
+	}
+	
+	
+	public static double getPourcentagePolluantPM25Dpt(ArrayList<Etablissement> l, String dpt, int annee) {
+	    double moy = 0;
+	    for (Etablissement e : l) {
+	        if (e.getLieu().getDepartement().equals(dpt)) {
+	            moy += e.getPollutionPM25(annee);
+	        }
+	    }
+	    return (moy / l.size()) * 100;
+	}
+
 
 }

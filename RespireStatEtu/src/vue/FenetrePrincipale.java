@@ -104,6 +104,7 @@ public class FenetrePrincipale extends JFrame{
 				spane = new JScrollPane(table);
 
 				table.setCellSelectionEnabled(false);
+
 				table.setPreferredSize(new Dimension(500,80));
 				table.setPreferredScrollableViewportSize(table.getPreferredSize());
 				table.setFillsViewportHeight(true);
