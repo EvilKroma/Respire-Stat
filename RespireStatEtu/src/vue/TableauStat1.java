@@ -46,7 +46,7 @@ public class TableauStat1 extends AbstractTableModel {
                 case 4:
                     return "Taux";
                 case 5:
-                    return "Distance à Paris (km)"; // La nouvelle ligne
+                    return "d< à Paris (+/-1km)"; // La nouvelle ligne
                 default:
                     throw new IllegalArgumentException("Invalid row index");
             }
@@ -85,7 +85,7 @@ public class TableauStat1 extends AbstractTableModel {
     	   final double PRLAT = 48.8566;
            final double  PRLONG = 2.3522;
         double earthRadius = 6371; 
-        double lon1 = Math.toRadians(PRLONG); // Long et lat inversées
+        double lon1 = Math.toRadians(PRLONG); // Long et lat inversées    
         double lon2 = Math.toRadians(coord2.getLatitude());
          
         double lat1 = Math.toRadians(PRLAT);
