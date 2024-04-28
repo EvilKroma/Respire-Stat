@@ -48,7 +48,7 @@ public class FenetrePrincipale extends JFrame{
 		setTitle("RespireStat");
 		setSize(960,720);
 		setLocationRelativeTo(null);
-		setResizable(true);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(buildContentPaneHomePage());
 	}
@@ -197,16 +197,18 @@ public class FenetrePrincipale extends JFrame{
 				etabs[0] = etabsNO2;
 				etabs[1] = etabsPM10;
 				etabs[2] = etabsPM25;
-				tab4 = new TableauStat4(etabs, annee);
+				tab4 = new TableauStat4(moyenneDptNO2, moyenneDptPM10,moyenneDptPM25,etabs, annee);
 
 				table5 = new JTable(tab4);
 				spane2  = new JScrollPane(table5);
 
 				table5.setCellSelectionEnabled(false);
-
-				table5.setPreferredSize(new Dimension(500,80));
 				table5.setPreferredScrollableViewportSize(table5.getPreferredSize());
 				table5.setFillsViewportHeight(true);
+				table5.setRowHeight(30);
+				table5.setPreferredSize(getPreferredSize());
+				spane2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+				spane2.setPreferredSize(new Dimension(table5.getPreferredSize().width, 100));
 
 				//onglet2.add(labelTableau,c);
 				onglet5.add(spane2,a);
