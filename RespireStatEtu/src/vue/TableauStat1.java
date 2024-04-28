@@ -28,7 +28,7 @@ public class TableauStat1 extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return 6;  
+        return 6;  // + 1 pour une nouvelle ligne
     }
 
     @Override
@@ -46,7 +46,7 @@ public class TableauStat1 extends AbstractTableModel {
                 case 4:
                     return "Taux";
                 case 5:
-                    return "Distance à Paris (km)";
+                    return "Distance à Paris (km)"; // La nouvelle ligne
                 default:
                     throw new IllegalArgumentException("Invalid row index");
             }
@@ -54,7 +54,7 @@ public class TableauStat1 extends AbstractTableModel {
             Etablissement etablissement = etabs[columnIndex - 1];
             switch (rowIndex) {
                 case 0:
-                    return etablissement.getIdentifiant();
+                	return etablissement.getIdentifiant();
                 case 1:
                     return etablissement.getNomEtablissement();
                 case 2:
@@ -64,7 +64,7 @@ public class TableauStat1 extends AbstractTableModel {
                 case 4:
                     return etablissement.getPollutionPM25(annee);
                 case 5:
-                    CoordGPS coord = etablissement.getCoordonnees();
+                	CoordGPS coord = etablissement.getCoordonnees(); // Affiche les coo
                     return calculateDistanceToParis(coord);
 
                 default:
