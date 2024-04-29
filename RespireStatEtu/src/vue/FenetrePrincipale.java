@@ -205,7 +205,7 @@ public class FenetrePrincipale extends JFrame{
 				table5.setCellSelectionEnabled(false);
 				table5.setPreferredScrollableViewportSize(table5.getPreferredSize());
 				table5.setFillsViewportHeight(true);
-				table5.setPreferredSize(new Dimension(580, 110));
+				table5.setPreferredSize(new Dimension(500, 96)); // Ajouter +16 par ligne
 
 				//onglet2.add(labelTableau,c);
 				onglet5.add(spane2,a);
