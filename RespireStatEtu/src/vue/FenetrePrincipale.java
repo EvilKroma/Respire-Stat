@@ -1,3 +1,4 @@
+
 package vue;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -46,7 +47,7 @@ public class FenetrePrincipale extends JFrame{
 		ConvertCSV.chargerEtablissements(csvPath+"/"+csvFileName);
 		
 		setTitle("RespireStat");
-		setSize(960,720);
+		setSize(960,820);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +61,7 @@ public class FenetrePrincipale extends JFrame{
 	
 		//ONGLETS
 		JTabbedPane onglets = new JTabbedPane(SwingConstants.TOP);
-		onglets.setPreferredSize(new Dimension(900,680));
+		onglets.setPreferredSize(new Dimension(900,780));
 
 		//ONGLET 1
 		JPanel onglet1 = new JPanel();
@@ -105,7 +106,7 @@ public class FenetrePrincipale extends JFrame{
 
 				table.setCellSelectionEnabled(false);
 
-				table.setPreferredSize(new Dimension(500,80));
+				table.setPreferredSize(new Dimension(500,96));
 				table.setPreferredScrollableViewportSize(table.getPreferredSize());
 				table.setFillsViewportHeight(true);
 
@@ -221,5 +222,3 @@ public class FenetrePrincipale extends JFrame{
 		return panel;
 	}
 }
-
-
