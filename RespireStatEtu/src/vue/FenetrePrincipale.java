@@ -164,7 +164,6 @@ public class FenetrePrincipale extends JFrame{
 		onglets.addTab("Moyenne par département en 2017", onglet4);
 
 
-
 		panel.add(onglets);
 		
 		
