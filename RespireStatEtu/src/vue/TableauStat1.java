@@ -1,92 +1,107 @@
 package vue;
 
 import javax.swing.table.AbstractTableModel;
-
+import model.CoordGPS;
 import model.Etablissement;
 
-public class TableauStat1 extends AbstractTableModel{
-	private static final long serialVersionUID = 1L;
-	private final String[] entetes = { "", "NO2", "PM10", "PM25" };	
-	private final Etablissement[] etabs;
-	private final int annee;
-	public TableauStat1(Etablissement[] contents, int annee) {
-		etabs = contents;
-		this.annee = annee;
-		entetes[0]=String.valueOf(annee);
-	}
-	
-	@Override
-	public int getColumnCount() {
-		return entetes.length;
-	}
-	@Override
-	public String getColumnName(int columnIndex) {
-		return entetes[columnIndex];
-	}
+public class TableauStat1 extends AbstractTableModel {
+    private static final long serialVersionUID = 1L;
+    private final String[] entetes = { "", "NO2", "PM10", "PM25" };
+    private final Etablissement[] etabs;
+    private final int annee;
 
-	@Override
-	public int getRowCount() {
-		return 5;
-	}
-	
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		if(columnIndex==0){
-			switch (rowIndex) {
+    public TableauStat1(Etablissement[] contents, int annee) {
+        etabs = contents;
+        this.annee = annee;
+        entetes[0] = String.valueOf(annee);
+    }
 
-			case 0:
-				// Identifiant
-				return "Identifiant";
+    @Override
+    public int getColumnCount() {
+        return entetes.length;
+    }
 
-			case 1:
-				// Nom
-				return "Nom";
+    @Override
+    public String getColumnName(int columnIndex) {
+        return entetes[columnIndex];
+    }
 
-			case 2:
-				// Ville
-				return "Ville";
+    @Override
+    public int getRowCount() {
+        return 6;  // + 1 pour une nouvelle ligne
+    }
 
-			case 3:
-				// Département
-				return "Département";
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        if (columnIndex == 0) {
+            switch (rowIndex) {
+                case 0:
+                    return "Identifiant";
+                case 1:
+                    return "Nom";
+                case 2:
+                    return "Ville";
+                case 3:
+                    return "Département";
+                case 4:
+                    return "Taux";
+                case 5:
+                    return "d à Paris (+/-1km)"; // La nouvelle ligne
+                default:
+                    throw new IllegalArgumentException("Invalid row index");
+            }
+        } else {
+            Etablissement etablissement = etabs[columnIndex - 1];
+            switch (rowIndex) {
+                case 0:
+                	return etablissement.getIdentifiant();
+                case 1:
+                    return etablissement.getNomEtablissement();
+                case 2:
+                    return etablissement.getLieu().getVille();
+                case 3:
+                    return etablissement.getLieu().getDepartement();
+                case 4:
+                    return etablissement.getPollutionPM25(annee);
+                case 5:
+                	CoordGPS coord = etablissement.getCoordonnees(); // Affiche les coo
+                    return calculateDistanceToParis(coord);
 
-			case 4:
-				// PM25
-				return "Taux";
+                default:
+                    throw new IllegalArgumentException("Invalid row index");
+            }
+        }
+    }
 
-			default:
-				throw new IllegalArgumentException();
-			}
-		}else {
-			switch (rowIndex) {
+    
+    private double calculateDistanceToParis(CoordGPS coord) {
+        final double PRLAT = 48.8566;
+        final double  PRLONG = 2.3522;
+        CoordGPS parisCoords = new CoordGPS(PRLAT, PRLONG);
+        return distance(parisCoords, coord);
+    }
 
-			case 0:
-				// Identifiant
-				return etabs[columnIndex-1].getIdentifiant();
+    private static double distance(CoordGPS coord1, CoordGPS coord2) {
+    	   final double PRLAT = 48.8566;
+           final double  PRLONG = 2.3522;
+        double earthRadius = 6371; 
+        double lon1 = Math.toRadians(PRLONG); // Long et lat inversées    
+        double lon2 = Math.toRadians(coord2.getLatitude());
+         
+        double lat1 = Math.toRadians(PRLAT);
+        double lat2 = Math.toRadians(coord2.getLongitude());
+        double dLon = lon2 - lon1;
+        double dLat = lat2 - lat1;
 
-			case 1:
-				// Nom
-				return etabs[columnIndex-1].getNomEtablissement();
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                   Math.cos(lat1) * Math.cos(lat2) *
+                   Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return Math.ceil(earthRadius * c);
+    }
 
-			case 2:
-				// Ville
-				return etabs[columnIndex-1].getLieu().getVille();
-
-			case 3:
-				// Département
-				return etabs[columnIndex-1].getLieu().getDepartement();
-
-			case 4:
-				// PM25
-				return etabs[columnIndex-1].getPollutionNO2(annee);
-
-			default:
-				throw new IllegalArgumentException();
-			}
-		}
-	}
-	
-	public Class<?> getColumnClass(int columnIndex) {
-		return String.class;
-	}
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return String.class;
+    }
 }

@@ -128,30 +128,86 @@ public class StatEtab {
 	 * @return L'établissement le plus polluant au N02
 	 * Flavie Tonon
 	 */
+	
+	
 	public static Etablissement getPlusPolluantNO2(ArrayList<Etablissement> l, int annee) {
-		//TODO Compléter getPlusPolluantNO2 
-		return null;
+	    Etablissement maxEtablissement = null; //On défini à null pr stocker les futur etablissement le + pollué, aucun pr l'instant
+	    double maxPollution = Double.MIN_VALUE; // Garde la valeur la plus haute trouvée. Min value spécifie que ça stocke la plus petite valeur possible
+	    
+	    for(Etablissement e : l) {
+	        double currentPollution = e.getPollutionNO2(annee);
+	        if (currentPollution > maxPollution) {
+	            maxPollution = currentPollution;
+	            maxEtablissement = e;
+	        }
+	    }
+	    
+	    return maxEtablissement;
 	}
-	/**
-	 * Trouve l'établissement le plus polluant au PM10 sur une année
-	 * @param l La liste des établissements
-	 * @param annee L'année de récolte des données demandée
-	 * @return L'établissement le plus polluant au PM10
-	 * Flavie Tonon
-	 */
+
+	
 	public static Etablissement getPlusPolluantPM10(ArrayList<Etablissement> l, int annee) {
-		//TODO Compléter getPlusPolluantPM10 
-		return null;
+	    Etablissement maxEtablissement = null;
+	    double maxPollution = Double.MIN_VALUE;
+	    
+	    for(Etablissement e : l) {
+	        double currentPollution = e.getPollutionPM10(annee);
+	        if (currentPollution > maxPollution) {
+	            maxPollution = currentPollution;
+	            maxEtablissement = e;
+	        }
+	    }
+	    
+	    return maxEtablissement;
 	}
-	/**
-	 * Trouve l'établissement le plus polluant au PM25 sur une année
-	 * @param l La liste des établissements
-	 * @param annee L'année de récolte des données demandée
-	 * @return L'établissement le plus polluant au PM25
-	 * Flavie Tonon
-	 */
+
+	
 	public static Etablissement getPlusPolluantPM25(ArrayList<Etablissement> l, int annee) {
-		//TODO Compléter getPlusPolluantPM25 
-		return null;
+	    Etablissement maxEtablissement = null;
+	    double maxPollution = Double.MIN_VALUE;
+	    
+	    for(Etablissement e : l) {
+	        double currentPollution = e.getPollutionPM25(annee);
+	        if (currentPollution > maxPollution) {
+	            maxPollution = currentPollution;
+	            maxEtablissement = e;
+	        }
+	    }
+	    
+	    return maxEtablissement;
 	}
+	
+	public static double getPourcentagePolluantNO2Dpt(ArrayList<Etablissement> l, String dpt, int annee) {
+	    double moy = 0;
+	    for (Etablissement e : l) {
+	        if (e.getLieu().getDepartement().equals(dpt)) {
+	            moy += e.getPollutionNO2(annee);
+	        }
+	    }
+	    return (moy / l.size()) * 100;
+	}
+	
+	
+	public static double getPourcentagePolluantPM10Dpt(ArrayList<Etablissement> l, String dpt, int annee) {
+	    double moy = 0;
+	    for (Etablissement e : l) {
+	        if (e.getLieu().getDepartement().equals(dpt)) {
+	            moy += e.getPollutionPM10(annee);
+	        }
+	    }
+	    return (moy / l.size()) * 100;
+	}
+	
+	
+	public static double getPourcentagePolluantPM25Dpt(ArrayList<Etablissement> l, String dpt, int annee) {
+	    double moy = 0;
+	    for (Etablissement e : l) {
+	        if (e.getLieu().getDepartement().equals(dpt)) {
+	            moy += e.getPollutionPM25(annee);
+	        }
+	    }
+	    return (moy / l.size()) * 100;
+	}
+
+
 }

@@ -1,4 +1,3 @@
-
 package vue;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -36,7 +35,7 @@ public class FenetrePrincipale extends JFrame{
 		File f;
 		String message="";
         do {
-        	csvPath = "C:/Users/deneu/eclipse-workspace/Projet-Respire/RespireStatEtu";
+        	csvPath = JOptionPane.showInputDialog( "Entrez le chemin vers le fichier : "+csvFileName );
 			f = new File(csvPath+"/"+csvFileName);
 			if(!f.exists())
 				message = "Le fichier n'a pas été trouvé.";
@@ -61,7 +60,7 @@ public class FenetrePrincipale extends JFrame{
 	
 		//ONGLETS
 		JTabbedPane onglets = new JTabbedPane(SwingConstants.TOP);
-		onglets.setPreferredSize(new Dimension(900,780));
+		onglets.setPreferredSize(new Dimension(900,780));	
 
 		//ONGLET 1
 		JPanel onglet1 = new JPanel();
@@ -206,7 +205,7 @@ public class FenetrePrincipale extends JFrame{
 				table5.setCellSelectionEnabled(false);
 				table5.setPreferredScrollableViewportSize(table5.getPreferredSize());
 				table5.setFillsViewportHeight(true);
-				table5.setPreferredSize(new Dimension(500, 96)); // Ajouter +16 par ligne
+				table5.setPreferredSize(new Dimension(580, 110));
 
 				//onglet2.add(labelTableau,c);
 				onglet5.add(spane2,a);
@@ -222,3 +221,5 @@ public class FenetrePrincipale extends JFrame{
 		return panel;
 	}
 }
+
+
