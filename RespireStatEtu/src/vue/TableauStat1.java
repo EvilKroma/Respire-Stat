@@ -46,7 +46,7 @@ public class TableauStat1 extends AbstractTableModel {
                 case 4:
                     return "Taux";
                 case 5:
-                    return "d< à Paris (+/-1km)"; // La nouvelle ligne
+                    return "d à Paris (+/-1km)"; // La nouvelle ligne
                 default:
                     throw new IllegalArgumentException("Invalid row index");
             }
