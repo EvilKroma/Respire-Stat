@@ -36,7 +36,7 @@ public class FenetrePrincipale extends JFrame{
 		File f;
 		String message="";
         do {
-        	csvPath = "C:/Users/deneu/eclipse-workspace/Projet-Respire/RespireStatEtu";
+        	csvPath = JOptionPane.showInputDialog( "Entrez le chemin vers le fichier : "+csvFileName );
 			f = new File(csvPath+"/"+csvFileName);
 			if(!f.exists())
 				message = "Le fichier n'a pas été trouvé.";

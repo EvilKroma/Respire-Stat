@@ -81,7 +81,7 @@ public class TableauStat1 extends AbstractTableModel {
         return distance(parisCoords, coord);
     }
 
-    private static double distance(CoordGPS coord1, CoordGPS coord2) {
+    private static int distance(CoordGPS coord1, CoordGPS coord2) {
     	   final double PRLAT = 48.8566;
            final double  PRLONG = 2.3522;
         double earthRadius = 6371; 
@@ -97,7 +97,8 @@ public class TableauStat1 extends AbstractTableModel {
                    Math.cos(lat1) * Math.cos(lat2) *
                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return Math.ceil(earthRadius * c);
+        int resultat = (int)Math.ceil(earthRadius * c);
+        return resultat;
     }
 
     @Override
