@@ -1,4 +1,4 @@
-# 📊 Application de Statistiques sur les Relevés Atmosphériques
+# 📊 Application de statistiques sur les relevés atmosphériques
 Cette application permet d'analyser et d'obtenir des statistiques sur des relevés atmosphériques à partir de différentes sources de données.
 
 ## 🚀 Fonctionnalités
